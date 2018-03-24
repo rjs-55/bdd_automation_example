@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 
 @Component
 public class ProjectDriver {
@@ -29,7 +28,7 @@ public class ProjectDriver {
     private String geckoDriver;
 
     @PostConstruct
-    public void setUpWebDriver() throws IOException {
+    public void setUpWebDriver() throws IllegalStateException {
         if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", geckoDriver);
             webDriver = new FirefoxDriver();

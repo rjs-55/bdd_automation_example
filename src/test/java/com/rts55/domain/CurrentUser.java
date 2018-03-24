@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CurrentUser {
 
-    private static ThreadLocal<User> users = new ThreadLocal<User>();
+    private static ThreadLocal<User> users = new ThreadLocal<>();
 
     @Autowired
     private UserBuilder userBuilder;

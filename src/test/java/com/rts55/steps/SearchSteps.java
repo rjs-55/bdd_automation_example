@@ -8,14 +8,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import static com.rts55.domain.ClientType.MAIN;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @Slf4j
-@Component
 public class SearchSteps {
 
     @Autowired
