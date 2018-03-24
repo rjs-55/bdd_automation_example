@@ -7,26 +7,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
-public class BasePage {
+class BasePage {
 
     private final WebDriver driver;
 
     private static final int DEFAULT_TIMEOUT = 30;
 
-    public BasePage(WebDriver driver) {
+    BasePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    protected void waitForPageTitle(String pageTitle) {
+    void waitForPageTitle(String pageTitle) {
         new WebDriverWait(driver, DEFAULT_TIMEOUT)
                 .until(titleIs(pageTitle));
     }
 
-    protected void waitForVisibilityOfElement(By elementIdentifier) {
+    void waitForVisibilityOfElement(By elementIdentifier) {
         new WebDriverWait(driver, 30).until(visibilityOf(driver.findElement(elementIdentifier)));
     }
 
-    protected WebDriver getDriver() {
+    WebDriver getDriver() {
         return driver;
     }
 

@@ -1,6 +1,8 @@
 package com.rts55;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
+@Slf4j
 public class ProjectDriver {
 
     private static WebDriver webDriver;
@@ -27,15 +30,26 @@ public class ProjectDriver {
     @Value("${geckodriver}")
     private String geckoDriver;
 
+    @Value("${chromedriver}")
+    private String chromeDriver;
+
     @PostConstruct
     public void setUpWebDriver() throws IllegalStateException {
-        if (browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", geckoDriver);
-            webDriver = new FirefoxDriver();
-        } else {
-            String errorMessage = browser + " is not a recognised option.";
-            throw new IllegalStateException(errorMessage);
+        switch (browser) {
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver", geckoDriver);
+                webDriver = new FirefoxDriver();
+                break;
+            case "chrome":
+                System.setProperty("webdriver.chrome.driver", chromeDriver);
+                webDriver = new ChromeDriver();
+                break;
+            default:
+                String errorMessage = String.format(
+                        "%s is not a recognised option.", browser);
+                throw new IllegalStateException(errorMessage);
         }
+        log.info(String.format("Browser is set to %s", browser));
 
     }
 
